@@ -21,18 +21,18 @@ def signup(request):
         email = email.strip().lower()
         if ('@' not in email) or (email[-4:] not in '.com.org.edu.gov.net'):
             messages.error(request, 'Your Email, ' + email + ', Is invalid!')
-            return render(request, 'accounts/signup.html')
+            return render(request, 'register.html')
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Your Email, ' + email + ',  Already Exists. Please Try Another Email')
-            return render(request, 'accounts/signup.html')
+            return render(request, 'register.html')
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Your Username, ' + username + ', Already Exists. Please Try Another Username')
-            return render(request, 'accounts/signup.html')
+            return render(request, 'register.html')
 
 
         if password != password1:
             messages.error(request, "Your passwords Don't match")
-            return render(request, 'accounts/signup.html')
+            return render(request, 'register.html')
         User.objects.create_user(email=email, first_name=first_name, last_name=last_name, 
                                     username=username, password=password)
         context = {
@@ -41,8 +41,8 @@ def signup(request):
             'last_name': last_name,
             'username': username
         }
-        return render(request, 'accounts/signup_success.html', context)
-    return render(request, 'accounts/signup.html')
+        return redirect('login')
+    return render(request, 'register.html')
 
 
 def user_login(request):
@@ -54,21 +54,21 @@ def user_login(request):
         email = email.strip().lower()
         if ('@' not in email) or (email[-4:] not in '.com.org.edu.gov.net'):
             messages.error(request, 'Your Email, ' + email +', Is Invalid!')
-            return render(request, 'Accounts/login.html')
+            return render(request, 'login.html')
         if not User.objects.filter(email=email).exists():
             messages.error(request, 'This email' + email + ', Does Not exists...')
-            return render(request, 'accounts/login.html')
+            return render(request, 'login.html')
         else:
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/')
-    return render(request, 'accounts/login.html')
+            return redirect('/')
+    return render(request, 'login.html')
 
 
 @login_required
 def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+    logout(request, user)
+    return redirect('login')
                 

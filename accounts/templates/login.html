@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    {% if messages %}
+    {% for message in messages %}
+    <h3 style="text-align: center;">{{ message }}</h3>
+    {% endfor %}
+    {% endif %}
+    <form method="post" action="#" enctype="multipart/form-data" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">	
+        {% csrf_token %}
+       <div class="row">
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="CustomerEmail">Email</label>
+                 <input type="email" name="email" placeholder="" id="CustomerEmail" class="" autocorrect="off" autocapitalize="off" autofocus="">
+             </div>
+         </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="CustomerPassword">Password</label>
+                 <input type="password" value="" name="password" placeholder="" id="CustomerPassword" class="">                        	
+             </div>
+         </div>
+       </div>
+       <div class="row">
+         <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+             <input type="submit" class="btn mb-3" value="Login">
+             <p class="mb-4">
+                 <a href="#" id="RecoverPassword">Forgot your password?</a> &nbsp; | &nbsp;
+                 <a href="register.html" id="customer_register_link">Create account</a>
+             </p>
+         </div>
+      </div>
+  </form>
+</body>
+</html>

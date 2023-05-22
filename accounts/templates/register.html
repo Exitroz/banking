@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <p class="margin-bottom-30 message">
+        {% if messages %}
+            {% for message in messages %}
+            <h3 style="text-align: center;">{{ message }}</h3>
+            {% endfor %}
+        {% endif %}
+    </p>
+    <form method="post" action="#" enctype="multipart/form-data" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">
+        {% csrf_token %}	
+       <div class="row">
+           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="first_name">First Name</label>
+                 <input type="text" name="first_name" placeholder="" id="FirstName" autofocus="">
+             </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="last_name">Last Name</label>
+                 <input type="text" name="last_name" placeholder="" id="LastName">
+             </div>
+            </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="Username">Username</label>
+                 <input type="text" name="username" placeholder="" id="CustomerEmail" class="" autocorrect="off" autocapitalize="off" autofocus="">
+             </div>
+         </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="Email">Email</label>
+                 <input type="email" name="email" placeholder="" id="CustomerEmail" class="" autocorrect="off" autocapitalize="off" autofocus="">
+             </div>
+         </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="CustomerPassword">Password</label>
+                 <input type="password" value="" name="password" placeholder="" id="CustomerPassword" class="">                        	
+             </div>
+         </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <div class="form-group">
+                 <label for="CustomerPassword">Confirm Password</label>
+                 <input type="password" value="" name="password1" placeholder="" id="CustomerPassword" class="">                        	
+             </div>
+         </div>
+       </div>
+       <div class="row">
+         <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+             <input type="submit" class="btn mb-3" value="Create">
+         </div>
+      </div>
+  </form>
+</body>
+</html>
