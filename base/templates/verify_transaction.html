@@ -1,0 +1,17 @@
+<html>
+    <head></head>
+    <body>
+        {% if messages %}
+        {% for message in messages %}
+        <h3 style="text-align: center;">{{ message }}</h3>
+        {% endfor %}
+        {% endif %}
+        <h1>Verify transaction</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="">Enter OTP</label>
+            <input type="text" name="otp">
+            <input type="submit" value="verify">
+        </form>
+    </body>
+</html>
