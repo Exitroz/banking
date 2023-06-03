@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_TRUSTED_ORIGINS = ['example.com']
+CSRF_TRUSTED_ORIGINS = ['https://banking-production-9af4.up.railway.app']
 ROOT_URLCONF = 'banking.urls'
 
 TEMPLATES = [
