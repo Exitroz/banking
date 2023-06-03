@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 
 from .forms import CustomerUserChangeForm, CustomerUserCreationForm
-
+from base.views import home
 User = get_user_model()
 
 

@@ -10,7 +10,8 @@ import random
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'welcome.html')
+
 
 login_required
 def transfer(request):
@@ -30,6 +31,7 @@ def transfer(request):
             )
             transaction.save()
             # send OTP to user's mobile number
+            
             # implement SMS gateway code here
             return redirect('verify-transaction', transaction.id)
     else:
