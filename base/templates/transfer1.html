@@ -1,30 +1,9 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-  
-<!-- Mirrored from tende.vercel.app/trade.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 May 2023 18:20:03 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tende</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/logoi.png" />
-    <!-- Custom Stylesheet -->
-     
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-
-  <body class="dashboard">
-
-<div id="preloader"><i>.</i><i>.</i><i>.</i></div>
-
-
+{% extends 'user_dashboard.html'%}
+{% load static %}
+{% block content %}
 <div id="main-wrapper">
   <div class="header bg-light">
-  <div class="container">
+    <div class="container">
     <div class="row">
       <div class="col-xxl-12">
         <div class="header-content">
@@ -170,8 +149,7 @@
     </div>
   </div>
 </div>
-
-  <div class="sidebar">
+<div class="sidebar">
   <div class="brand-logo">
     <a href="index-2.html"><img src="images/logoi.png" alt="" width="30" /> </a>
   </div>
@@ -179,7 +157,7 @@
     <ul>
       <li>
         <a
-          href="index-2.html"
+          href="{% url 'dashboard' %}"
           data-toggle="tooltip"
           data-placement="right"
           title="Home"
@@ -189,10 +167,10 @@
       </li>
       <li>
         <a
-          href="trade.html"
+          href="{% url 'transfer'%}"
           data-toggle="tooltip"
           data-placement="right"
-          title="Trade"
+          title="Transfer"
         >
           <span><i class="bi bi-globe2"></i></span>
         </a>
@@ -220,7 +198,7 @@
       </li>
       <li class="logout">
         <a
-          href="signin.html"
+          href="{% url 'logout' %}"
           data-toggle="tooltip"
           data-placement="right"
           title="Signout"
@@ -241,131 +219,14 @@
         <div class="col-xxl-3 col-xl-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Buy</h4>
-            </div>
-            <div class="card-body">
-              <form name="myform" class="currency_validate trade-form row g-3">
-                <div class="col-12">
-                  <label class="form-label">Send</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">USD</option>
-                      <option value="master">Euro</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Receive</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">BTC</option>
-                      <option value="master">ETH</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <p class="mb-0">
-                  1 USD ~ 0.000088 BTC
-                  <a href="#">Expected rate <br />No extra fees</a>
-                </p>
-
-                <!-- <button type="submit" name="submit" class="btn btn-success btn-block">Exchange
-                                        Now</button> -->
-                <button
-                  type="button"
-                  class="btn btn-primary btn-block"
-                  data-toggle="modal"
-                  data-target="#BuyModal"
-                >
-                  Buy Now
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-xxl-3 col-xl-6">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Sell</h4>
-            </div>
-            <div class="card-body">
-              <form name="myform" class="currency_validate trade-form row g-3">
-                <div class="col-12">
-                  <label class="form-label">Send</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">USD</option>
-                      <option value="master">Euro</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Receive</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">BTC</option>
-                      <option value="master">ETH</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <p class="mb-0">
-                  1 USD ~ 0.000088 BTC
-                  <a href="#">Expected rate <br />No extra fees</a>
-                </p>
-
-                <button
-                  type="button"
-                  class="btn btn-primary btn-block"
-                  data-toggle="modal"
-                  data-target="#SellModal"
-                >
-                  Sell Now
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-xxl-3 col-xl-6">
-          <div class="card">
-            <div class="card-header">
               <h4 class="card-title">Transfer</h4>
             </div>
             <div class="card-body">
-              <form name="myform" class="currency_validate trade-form row g-3">
+              <form method="post" name="myform" class="currency_validate trade-form row g-3">
+                {% csrf_token %}
                 <div class="col-12">
                   <label class="form-label">Send</label>
                   <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">USD</option>
-                      <option value="master">Euro</option>
-                    </select>
                     <input
                       type="text"
                       name="currency_amount"
@@ -378,10 +239,6 @@
                 <div class="col-12">
                   <label class="form-label">Receive</label>
                   <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">BTC</option>
-                      <option value="master">ETH</option>
-                    </select>
                     <input
                       type="text"
                       name="currency_amount"
@@ -408,305 +265,12 @@
             </div>
           </div>
         </div>
-        <div class="col-xxl-3 col-xl-6">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Convert</h4>
-            </div>
-            <div class="card-body">
-              <form name="myform" class="currency_validate trade-form row g-3">
-                <div class="col-12">
-                  <label class="form-label">From</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">USD</option>
-                      <option value="master">Euro</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">To</label>
-                  <div class="input-group">
-                    <select class="form-control" name="method">
-                      <option value="bank">BTC</option>
-                      <option value="master">ETH</option>
-                    </select>
-                    <input
-                      type="text"
-                      name="currency_amount"
-                      class="form-control"
-                      placeholder="0.0214 BTC"
-                    />
-                  </div>
-                </div>
-
-                <p class="mb-0">
-                  1 USD ~ 0.000088 BTC
-                  <a href="#">Expected rate <br />No extra fees</a>
-                </p>
-
-                <button
-                  type="button"
-                  class="btn btn-success btn-block"
-                  data-toggle="modal"
-                  data-target="#convertModal"
-                >
-                  Convert Now
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="row">
         <div class="col-xxl-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Buy Transaction</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-striped responsive-table">
-                  <thead>
-                    <tr>
-                      <th>Type</th>
-                      <th>Coin Name</th>
-                      <th>Wallet</th>
-                      <th>Amount</th>
-                      <th>Balance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Bank *******5264</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc LTC"></i> Litecoin</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc XRP"></i> Ripple</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc DASH"></i> Dash</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xxl-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Sell Transaction</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-striped responsive-table">
-                  <thead>
-                    <tr>
-                      <th>Type</th>
-                      <th>Coin Name</th>
-                      <th>Wallet</th>
-                      <th>Amount</th>
-                      <th>Balance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Bank *******5264</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc LTC"></i> Litecoin</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc XRP"></i> Ripple</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc DASH"></i> Dash</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xxl-12">
-          <div class="card">
-            <div class="card-header">
               <h4 class="card-title">Transfer Transaction</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-striped responsive-table">
-                  <thead>
-                    <tr>
-                      <th>Type</th>
-                      <th>Coin Name</th>
-                      <th>Wallet</th>
-                      <th>Amount</th>
-                      <th>Balance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Bank *******5264</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc LTC"></i> Litecoin</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc XRP"></i> Ripple</td>
-                      <td>Using - Card *******8475</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="success-arrow"
-                          ><i class="bi bi-arrow-up-short"></i> Buy</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc DASH"></i> Dash</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-success">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="danger-arrow"
-                          ><i class="bi bi-arrow-down-short"></i> Sold</span
-                        >
-                      </td>
-                      <td class="coin-name"><i class="cc BTC"></i> Bitcoin</td>
-                      <td>Using - Card *******2321</td>
-                      <td class="text-danger">-0.000242 BTC</td>
-                      <td>-0.125 USD</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xxl-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Convert Transaction</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -1162,35 +726,4 @@
     </div>
   </div>
 </div>
-
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-
-
-
-<script src="vendor/basic-table/jquery.basictable.min.js"></script>
-<script src="js/plugins/basic-table-init.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="js/scripts.js"></script>
-
-
-</body>
-
-
-<!-- Mirrored from tende.vercel.app/trade.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 May 2023 18:20:03 GMT -->
-</html>
+{% endblock %}

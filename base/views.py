@@ -37,7 +37,7 @@ def transfer(request):
     else:
         form = TransferForm()
     context = {'form': form}
-    return render(request, 'transfer.html', context)
+    return render(request, 'transfer1.html', context)
 
 def verify_transaction(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
@@ -66,3 +66,9 @@ def verify_transaction(request, transaction_id):
             messages.error(request, 'Invalid OTP.')
     context = {'transaction': transaction}
     return render(request, 'verify_transaction.html', context)
+
+
+def dashboard(request):
+    account = Account.objects.all()
+    context = {'account':account}
+    return render(request, 'index.html', context)
