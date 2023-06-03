@@ -60,10 +60,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_COOKIE_DOMAIN = 'https://banking-production-9af4.up.railway.app/'
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 CSRF_TRUSTED_ORIGINS = ['https://banking-production-9af4.up.railway.app']
 
 ROOT_URLCONF = 'banking.urls'
