@@ -29,7 +29,7 @@
                 </form>
               </div>
             </div>
-
+            
             <div class="header-right">
               <div class="dark-light-toggle" onclick="themeToggle()">
                 <span class="dark"><i class="bi bi-moon"></i></span>
@@ -226,7 +226,8 @@
           <div class="page-title-content">
             <p>
               Welcome Back,
-              <strong class="text-primary">{{request.user.username}}</strong>
+              <strong class="text-primary">{{request.user.first_name}}</strong>
+              <strong class="text-primary">{{request.user.last_name}}</strong>
             </p>
           </div>
         </div>
@@ -285,7 +286,7 @@
                     <div class="col-xxl-6 col-xl-6 col-lg-6">
                       <div class="balance-chart">
                         <div id="balance-chart"></div>
-                        <h4>Total Balance = $ 5360</h4>
+                        <h4>Total Balance = $ {{request.user.account.balance}}</h4>
                       </div>
                     </div>
                     {% comment %} <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -347,33 +348,33 @@
                     <li>
                       <h5>Available Balance</h5>
                       <div class="text-end">
-                        <h5>$0.0000</h5>
+                        <h5>${{request.user.account.balance}}</h5>
                         
                       </div>
                     </li>
                     <li>
                       <h5>Equity Balance</h5>
                       <div class="text-end">
-                        <h5>$0.0000</h5>
+                        <h5>${{request.user.account.balance}}</h5>
                         
                       </div>
                     </li>
                     <li>
                       <h5>Used Margin</h5>
                       <div class="text-end">
-                        <h5>$0.0000</h5>
+                        <h5>${{request.user.account.balance}}</h5>
                       </div>
                     </li>
                     <li>
                       <h5>Free Margin</h5>
                       <div class="text-end">
-                        <h5>$0.0000</h5>
+                        <h5>${{request.user.account.balance}}</h5>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-
+            
             <!--Transactions-->
             <div class="col-xxl-12 col-xl-12">
               <div class="card">

@@ -7,6 +7,8 @@ from .models import Transaction, OTP
 from accounts.models import Account
 from .forms import TransferForm
 import random
+from django.core.mail import EmailMessage, get_connection, send_mail
+from django.conf import settings
 
 # Create your views here.
 def home(request):
@@ -24,20 +26,40 @@ def transfer(request):
             # store OTP in database
             transaction = Transaction(
                 sender=request.user,
-                receiver_name=form.cleaned_data['receiver_name'],
-                receiver_number=form.cleaned_data['receiver_number'],
+                account_name=form.cleaned_data['account_name'],
+                account_number=form.cleaned_data['account_number'],
+                bank_name=form.cleaned_data['bank_name'],
                 amount=form.cleaned_data['amount'],
                 otp=otp
             )
             transaction.save()
-            # send OTP to user's mobile number
+            # send OTP to user's email
+            send_mail(
+                "You placed a transfer request",
+                str(otp),
+                None,
+                ["ezeobih@gmail.com"],
+                fail_silently=False,
+            )
+            # with get_connection(  
+            # host=settings.EMAIL_HOST, 
+            #     port=settings.EMAIL_PORT,  
+            #     username=settings.EMAIL_HOST_USER, 
+            #     password=settings.EMAIL_HOST_PASSWORD, 
+            #     use_tls=settings.EMAIL_USE_TLS  
+            #     ) as connection:  
+            # subject = request.POST.get("subject")  
+            # email_from = settings.EMAIL_HOST_USER  
+            # recipient_list = [request.POST.get("email"), ]  
+            # message = request.POST.get("message")  
+            # EmailMessage(subject, message, email_from, recipient_list, connection=connection).send()
             
             # implement SMS gateway code here
             return redirect('verify-transaction', transaction.id)
     else:
         form = TransferForm()
     context = {'form': form}
-    return render(request, 'transfer1.html', context)
+    return render(request, 'transfer.html', context)
 
 def verify_transaction(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
@@ -49,8 +71,9 @@ def verify_transaction(request, transaction_id):
             # execute transaction
             account = Account.objects.get(user=user)
             sender = transaction.sender
-            receiver_name = transaction.receiver_name
-            receiver_number = transaction.receiver_number
+            account_name = transaction.account_name
+            account_number = transaction.account_number
+            bank_name = transaction.bank_name
             amount = transaction.amount
             new_balance = account.balance - amount
             account.balance = new_balance
@@ -58,10 +81,11 @@ def verify_transaction(request, transaction_id):
             # sender.balance -= amount
             # receiver.balance += amount
             sender.save()
+            account.save()
             # receiver.save()
             # transaction.delete()
             messages.success(request, 'Transaction successful.')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid OTP.')
     context = {'transaction': transaction}
