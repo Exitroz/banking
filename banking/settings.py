@@ -448,7 +448,7 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://banking-production-9af4.up.railway.app/",
+    "https://banking-production-9af4.up.railway.app",
 ]
 CORS_ALLOW_ALL_ORIGINS: True
 
@@ -471,11 +471,11 @@ CORS_ALLOW_HEADERS = (
 )
 
 CORS_ALLOWED_ORIGINS = [
-    "https://banking-production-9af4.up.railway.app/",
+    "https://banking-production-9af4.up.railway.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://banking-production-9af4.up.railway.app/",
+    "https://banking-production-9af4.up.railway.app",
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
