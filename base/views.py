@@ -10,6 +10,7 @@ import random
 from django.core.mail import EmailMessage, get_connection, send_mail
 from django.conf import settings
 
+
 # Create your views here.
 def home(request):
     return render(request, 'welcome.html')
@@ -34,13 +35,13 @@ def transfer(request):
             )
             transaction.save()
             # send OTP to user's email
-            send_mail(
-                "You placed a transfer request",
-                str(otp),
-                None,
-                ["ezeobih@gmail.com"],
-                fail_silently=False,
-            )
+            # send_mail(
+            #     "You placed a transfer request, please provide the otp below to verify your transaction",
+            #     str(otp),
+            #     'support@infinixfinance.com',
+            #     ["ezeobi888@gmail.com"],
+            #     fail_silently=False,
+            # )
             # with get_connection(  
             # host=settings.EMAIL_HOST, 
             #     port=settings.EMAIL_PORT,  
@@ -96,3 +97,15 @@ def dashboard(request):
     account = Account.objects.all()
     context = {'account':account}
     return render(request, 'index.html', context)
+
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)
+
+def contact(request):
+    context = {}
+    return render(request, 'contact.html', context)
+
+def services(request):
+    context = {}
+    return render(request, 'services.html', context)
