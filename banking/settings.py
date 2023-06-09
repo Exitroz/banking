@@ -365,7 +365,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'base',
     'accounts',
-    'corsheader',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
