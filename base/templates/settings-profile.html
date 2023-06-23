@@ -1,0 +1,112 @@
+{% extends 'user_dashboard.html'%}
+{% load static %}
+
+{% block content %}
+<div id="main-wrapper">
+  <div class="header bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12">
+        {% include 'top-header.html'%}
+        </div>
+      </div>
+    </div>
+ </div>
+
+ {% include 'sidebar.html'%}
+
+
+  <div class="content-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12 col-xl-12">
+          <div class="page-title">
+            <h4>Profile</h4>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="settings-menu">
+    <a href="#">Profile</a>
+   
+     </div>
+    </div>
+            <div class="card-body">
+              <div class="row">
+              
+                <div class="col-xxl-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">Personal Information</h4>
+                    </div>
+                    <div class="card-body">
+                      <form
+                        method="post"
+                        name="myform"
+                        class="personal_validate"
+                      >
+                      {% csrf_token %}
+                        <div class="row g-4">
+                          <div class="col-xxl-6 col-xl-6 col-lg-6">
+                            <label class="form-label">First Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              value="{{ account.first_name }}"
+                              name="firstname"
+                            />
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6">
+                            <label class="form-label">Email</label>
+                            <input
+                              type="email"
+                              class="form-control"
+                              value="{{ account.email }}"
+                              name="email"
+                              readonly
+                            />
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6">
+                            <label class="form-label">Last Name</label>
+                            <input
+                              type="text"
+                              class="form-control hasDatepicker"
+                              value="{{ account.last_name }}"
+                              name="lastname"
+                            />
+                          </div>
+                          <div class="col-xxl-6 col-xl-6 col-lg-6">
+                            <label class="form-label">Username</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              value="{{ account.username }}"
+                              name="username"
+                            />
+                          </div>
+                       
+                         
+                        
+
+                          <div class="col-12">
+                            <button
+                              class="btn btn-success pl-5 pr-5 waves-effect"
+                              type="submit"
+                            >
+                              Save
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

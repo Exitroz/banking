@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Transaction, OTP
-from accounts.models import Account
+from accounts.models import Account, User
 from .forms import TransferForm
 import random
 from django.core.mail import EmailMessage, get_connection, send_mail
@@ -16,8 +16,9 @@ def home(request):
     return render(request, 'welcome.html')
 
 
-login_required
+@login_required(login_url='login')
 def transfer(request):
+    transaction = Transaction.objects.all()
     if request.method == 'POST':
         form = TransferForm(request.POST)
         if form.is_valid():
@@ -35,31 +36,20 @@ def transfer(request):
             )
             transaction.save()
             # send OTP to user's email
-            # send_mail(
-            #     "You placed a transfer request, please provide the otp below to verify your transaction",
-            #     str(otp),
-            #     'support@infinixfinance.com',
-            #     ["ezeobi888@gmail.com"],
-            #     fail_silently=False,
-            # )
-            # with get_connection(  
-            # host=settings.EMAIL_HOST, 
-            #     port=settings.EMAIL_PORT,  
-            #     username=settings.EMAIL_HOST_USER, 
-            #     password=settings.EMAIL_HOST_PASSWORD, 
-            #     use_tls=settings.EMAIL_USE_TLS  
-            #     ) as connection:  
-            # subject = request.POST.get("subject")  
-            # email_from = settings.EMAIL_HOST_USER  
-            # recipient_list = [request.POST.get("email"), ]  
-            # message = request.POST.get("message")  
-            # EmailMessage(subject, message, email_from, recipient_list, connection=connection).send()
+            send_mail(
+                "You placed a transfer request, please provide the otp below to verify your transaction",
+                str(otp),
+                'floydedwards22@gmail.com',
+                ["ezeobi888@gmail.com"],
+                fail_silently=False,
+            )
+            
             
             # implement SMS gateway code here
             return redirect('verify-transaction', transaction.id)
     else:
         form = TransferForm()
-    context = {'form': form}
+    context = {'form': form, 'transaction': transaction}
     return render(request, 'transfer.html', context)
 
 def verify_transaction(request, transaction_id):
@@ -92,10 +82,10 @@ def verify_transaction(request, transaction_id):
     context = {'transaction': transaction}
     return render(request, 'verify_transaction.html', context)
 
-
 def dashboard(request):
+    transaction = Transaction.objects.all()
     account = Account.objects.all()
-    context = {'account':account}
+    context = {'account':account, 'transaction': transaction}
     return render(request, 'index.html', context)
 
 def about(request):
@@ -109,3 +99,22 @@ def contact(request):
 def services(request):
     context = {}
     return render(request, 'services.html', context)
+
+@login_required(login_url='login')
+def updateProfile(request, id):
+    account = User.objects.get(pk=id)
+    if request.method == 'POST':
+        account.username = request.POST.get('username')
+        account.first_name = request.POST.get('firstname')
+        account.last_name = request.POST.get('lastname')
+        account.save()
+        return redirect('dashboard')
+        
+    context = {'account': account}
+    return render(request, 'settings-profile.html', context)
+
+@login_required(login_url='login')
+def profile(request, id):
+    account = User.objects.get(pk=id)
+    context = {'account': account}
+    return render(request, 'profile.html', context)

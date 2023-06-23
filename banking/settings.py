@@ -141,14 +141,23 @@
 
 # AUTH_USER_MODEL = 'accounts.User'
 
+# # EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
 
-# EMAIL_BACKEND = 'sendiblue.backends.sendinblue.EmailBackend'
+# # ANYMAIL = {
+# #     "SENDINBLUE_API_KEY": "VNWzdbq0Xwc7gkfr",
+# #     "SEND_DEFAULTS": {
+# #         "tags": ["app"]
+# #     },
+# #     "DEBUG_API_REQUESTS": DEBUG,
+# # }
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp-relay.sendinblue.com'
-# EMAIL_USE_TLS = False
 # EMAIL_PORT = 587
-# EMAIL_USE_SSL = False
-# EMAIL_HOST_USER = 'ezeobih@gmail.com'
-# EMAIL_HOST_PASSWORD = '5b0WJOnQ6qgC3fmF'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'floydedwards22@gmail.com'
+# EMAIL_HOST_PASSWORD = 'VNWzdbq0Xwc7gkfr'
+# DEFAULT_FROM_EMAIL = 'floydedwards22@gmail.com'
+
 
 
 
@@ -530,10 +539,10 @@ AUTH_USER_MODEL = 'accounts.User'
 
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.locathost'
-# EMAIL_USE_TLS = False
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-# EMAIL_HOST_USER = 'your@djangoapp.com'
-# EMAIL_HOST_PASSWORD = 'your password'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.locathost'
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'your@djangoapp.com'
+EMAIL_HOST_PASSWORD = 'your password'
