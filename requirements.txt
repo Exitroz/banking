@@ -17,3 +17,4 @@ typing_extensions
 tzdata
 urllib3
 whitenoise
+six

@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Login</title>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logoi.png' %}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon.jpg' %}" />
   <!-- Custom Stylesheet -->
    
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -22,18 +22,40 @@
 
 
 <div id="main-wrapper">
-  <div class="authincation section-padding">
-    <div class="container h-100">
-      <div class="row justify-content-center h-100 align-items-center">
+  <div class="authincation">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
         <div class="col-xl-5 col-md-6">
           <div class="mini-logo text-center my-4">
-            <a href="index-2.html"><img src="{% static 'images/logo.png' %}" alt="" /></a>
-            <h4 class="card-title mt-5">Sign in to Tende</h4>
+            <a href="{% url 'home' %}" class="text-decoration-none">
+              <img src="{% static 'assets/img/demos/insurance/oaksville_logo2.jpg' %}" width="223" height="146" class="img-fluid mb-4" alt="Porto Insurance" />
+          </a>
+            <h4 class="card-title mt-5">Sign in to Oaksville Capital</h4>
           </div>
           {% if messages %}
-          {% for message in messages %}
-          <h3 style="text-align: center;">{{ message }}</h3>
-          {% endfor %}
+              {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                      <div class="alert alert-success alert-dismissible" role="alert">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                          {{ message|safe|escape }}
+                      </div>
+                  {% elif message.tags == 'error' %}
+                      <div class="alert alert-danger alert-dismissible" role="alert">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                          {{ message|safe|escape }}
+                      </div>
+                  {% elif message.tags == 'info' %}
+                      <div class="alert alert-info alert-dismissible" role="alert">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                          {{ message|safe|escape }}
+                      </div>
+                  {% elif message.tags == 'warning' %}
+                      <div class="alert alert-warning alert-dismissible" role="alert">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                          {{ message|safe|escape }}
+                      </div>
+                  {% endif %}
+              {% endfor %}
           {% endif %}
           <div class="auth-form card">
             <div class="card-body">

@@ -6,8 +6,49 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from .forms import CustomerUserChangeForm, CustomerUserCreationForm
 from base.views import home
+from .tokens import account_activation_token
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
 User = get_user_model()
 
+def activate(request, uidb64, token):
+    # User = get_user_model()
+    # try:
+    #     uid = force_str(urlsafe_base64_decode(uidb64))
+    #     user = User.objects.get(pk=uid)
+    # except:
+    #     user = None
+
+    # if user is not None and account_activation_token.check_token(user, token):
+    #     user.is_active = True
+    #     user.save()
+
+    #     messages.success(request, "Thank you for your email confirmation. Now you can login your account.")
+    #     return redirect('login')
+    # else:
+    #     messages.error(request, "Activation link is invalid!")
+
+    return redirect('homepage')
+
+def activateEmail(request, user, to_mail):
+    mail_subject = "Activate your user account."
+    message = render_to_string("template_active_account.html", {
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        "protocol": 'https' if request.is_secure() else 'http'
+    })
+    email = EmailMessage(mail_subject, message, to=[to_mail])
+    if email.send():
+        messages.success(request, f'Dear {user}, please go to your email {to_mail} and click on the \
+            acivation link to confirm and complete registration, Note check your spam folder.')
+        # return redirect('login')
+    else:
+         messages.error(request, f'Problem sending email to {to_mail}, check if you typed it correctly.')
 
 def signup(request):
     if request.method == 'POST':
@@ -33,14 +74,18 @@ def signup(request):
         if password != password1:
             messages.error(request, "Your passwords Don't match")
             return render(request, 'signup.html')
-        User.objects.create_user(email=email, first_name=first_name, last_name=last_name, 
+        user = User.objects.create_user(email=email, first_name=first_name, last_name=last_name, 
                                     username=username, password=password)
+        user.save()
+        activateEmail(request, user, email)
+        
         context = {
             'email': email,
             'first_name': first_name,
             'last_name': last_name,
             'username': username
         }
+        
         return redirect('home')
     return render(request, 'signup.html')
 

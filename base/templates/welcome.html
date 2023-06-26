@@ -3,8 +3,34 @@
 
 	{% block content %}
 	<div class="body">
+			{% if messages %}
+				{% for message in messages %}
+					{% if message.tags == 'success' %}
+						<div class="alert alert-success alert-dismissible" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							{{ message|safe|escape }}
+						</div>
+					{% elif message.tags == 'error' %}
+						<div class="alert alert-danger alert-dismissible" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							{{ message|safe|escape }}
+						</div>
+					{% elif message.tags == 'info' %}
+						<div class="alert alert-info alert-dismissible" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							{{ message|safe|escape }}
+						</div>
+					{% elif message.tags == 'warning' %}
+						<div class="alert alert-warning alert-dismissible" role="alert">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							{{ message|safe|escape }}
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 			{% include 'header.html' %}
-
+		
+			
 			<div role="main" class="main">
 				
 				<section class="section position-relative border-0 m-0" style="background-image: url({% static 'assets/img/demos/insurance/backgrounds/background-1.jpg' %}); background-position: center; background-size: cover;">
@@ -271,7 +297,7 @@
 								<div class="bg-light text-center p-5">
 									<div class="py-2 px-md-5">
 										<h2 class="font-weight-bold text-7 mb-1">Ready To Get a Quick Quote?</h2>
-										<p class="text-3-5 mb-5-5">Lorem ipsum dolor sit amet, consectetur aipiscing. </p>
+										<p class="text-3-5 mb-5-5">Click the button below to take part in this lifetime opportunities </p>
 										<form action="#">
 											<div class="d-flex custom-form-control-group-style-1 mb-3">
 												<select class="form-control" name="insurance_type">
@@ -282,18 +308,18 @@
 												</select>
 												<input type="text" class="form-control" name="zip" placeholder="ZIP CODE" />
 											</div>
-											<input type="submit" class="btn btn-secondary btn-rounded border-0 w-100 text-center font-weight-bold text-3-5 btn-py-3" value="GET QUOTE" />
+											<input type="submit" class="btn btn-secondary btn-rounded border-0 w-100 text-center font-weight-bold text-3-5 btn-py-3" value="GET STARTED" />
 										</form>
 									</div>
 								</div>
 								<div class="bg-primary d-flex flex-column flex-sm-row align-items-center justify-content-center p-5">
-									<a href="https://www.okler.net/cdn-cgi/l/email-protection#92e2fde0e6fdd2fbfce1e7e0f3fcf1f7bcf1fdff" class="d-inline-flex align-items-center text-color-light text-decoration-none opacity-hover-8 font-weight-medium text-4 mb-3 mb-sm-0">
+									<a href="mailto:support@oaksvillecapital.com" class="d-inline-flex align-items-center text-color-light text-decoration-none opacity-hover-8 font-weight-medium text-4 mb-3 mb-sm-0">
 										<i class="icon icon-envelope me-2 text-5 position-relative top-1"></i>
-										<span class="__cf_email__" data-cfemail="eb9b84999f84ab8285989e998a85888ec5888486">[email&#160;protected]</span>
+										<span class="" data-cfemail="">support@oaksvillecapital.com</span>
 									</a>
 									<a href="tel:0123456789" class="d-inline-flex align-items-center text-color-light text-decoration-none opacity-hover-8 font-weight-medium text-4 ms-sm-5-5">
 										<i class="icon icon-phone me-2 text-5 position-relative top-1"></i>
-										800-123-4567
+										(480) 377-8100
 									</a>
 								</div>
 							</div>

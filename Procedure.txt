@@ -24,3 +24,10 @@ Test the application
 Once you have implemented all the features, test the application for any bugs or errors. Make sure to test all scenarios for transfer and withdraw and OTP verification.
 
 Again, these are general steps that you can follow to build a Django application that can transfer money, send OTP before confirming/processing the transfer, and withdraw money. You can modify these steps according to your specific requirements and functionality.
+
+
+
+
+Database - digital
+user - digital
+password - Exitroz9@
